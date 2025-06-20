@@ -1,13 +1,13 @@
-
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from scipy.stats import zscore
+import os
 
 def preprocess_diabetes_dataset(filepath, save_cleaned=True):
     """
     Fungsi untuk memuat dan melakukan preprocessing dataset diabetes.
-    
+
     Tahapan preprocessing:
     1. Load dataset
     2. Drop duplikat
@@ -51,11 +51,19 @@ def preprocess_diabetes_dataset(filepath, save_cleaned=True):
     scaler = StandardScaler()
     df[features_to_scale] = scaler.fit_transform(df[features_to_scale])
 
-    # 7. Save cleaned dataset
-    if save_cleaned:
-        df.to_csv("diabetes_cleaned.csv", index=False)
-        print("Data bersih disimpan ke 'diabetes_cleaned.csv'")
+    # 7. Verifikasi data setelah preprocessing
+    print(f"Data setelah preprocessing: {df.shape[0]} baris, {df.shape[1]} kolom")
 
-    # 8. Return dataframe
+    # 8. Save cleaned dataset (pastikan direktori kerja benar)
+    if save_cleaned:
+        output_path = os.path.join(os.getcwd(), "diabetes_cleaned.csv")  # Tentukan lokasi file
+        df.to_csv(output_path, index=False)
+        print(f"Data bersih disimpan ke '{output_path}'")
+
+    # 9. Return cleaned dataframe
     print("Distribusi label diabetes:\n", df['diabetes'].value_counts())
     return df
+
+# Memanggil fungsi dengan path dataset yang benar dan memastikan file disimpan
+dataset_filepath = '../diabetes_prediction_dataset.csv'  # Ganti dengan path file Anda
+preprocess_diabetes_dataset(dataset_filepath, save_cleaned=True)
