@@ -1,0 +1,3 @@
+Link Eksperimen Dagshub Febie Elfaladonna:
+- https://dagshub.com/hubbiy18/Eksperimen_SML_Febie.mlflow/#/experiments/2/runs/e21b0888c6824a99a310f03e999ef896
+- https://dagshub.com/hubbiy18/Eksperimen_SML_Febie/experiments
